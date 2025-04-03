@@ -3,11 +3,11 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-your-secret-key-here'
+# Security settings - replace with your actual values
+SECRET_KEY = 'django-insecure-your-secure-key-here'  # Replace in production
+DEBUG = True  # Set to False in production
 
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']  # Add production hosts when needed
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -53,11 +53,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# Naath Bank Database Configuration
+# Database Configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'naath_bank.db',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Standard SQLite path
     }
 }
 
