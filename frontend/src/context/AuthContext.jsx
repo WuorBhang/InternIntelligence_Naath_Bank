@@ -10,21 +10,26 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'))
   const navigate = useNavigate()
 
-  const login = async (credentials) => {
-    try {
-      const response = await axios.post('/api/auth/login/', credentials)
-      const { access } = response.data
-      localStorage.setItem('token', access)
-      setToken(access)
-      const decoded = jwt_decode(access)
-      setUser(decoded)
-      navigate('/')
-      return true
-    } catch (error) {
-      console.error('Login error:', error)
-      return false
+    const login = async (credentials) => {
+        try {
+            const response = await axios.post('/api/auth/login/', credentials)
+            const { access } = response.data
+            localStorage.setItem('token', access)
+            setToken(access)
+            const decoded = jwt_decode(access)
+            setUser(decoded)
+            navigate('/')
+            return { success: true }
+        } catch (error) {
+            console.error('Login error:', error.response?.data || error.message)
+            return {
+                success: false,
+                error: error.response?.data?.detail || 
+                      error.response?.data?.message || 
+                      'Invalid username or password'
+            }
+        }
     }
-  }
 
   const logout = () => {
     localStorage.removeItem('token')

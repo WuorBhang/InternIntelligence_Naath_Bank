@@ -19,16 +19,18 @@ const LoginPage = () => {
     })
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    const { success, error } = await login(credentials)
-    setLoading(false)
-    
-    if (!success) {
-      toast.error(error || 'Invalid username or password')
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+        const result = await login(credentials)
+        setLoading(false)
+        
+        if (!result.success) {
+            toast.error(result.error || 'Invalid username or password')
+            // Clear password field on error
+            setCredentials(prev => ({...prev, password: ''}))
+        }
     }
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-equity-blue to-equity-light-blue">

@@ -6,9 +6,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'equity-blue': '#0033A0',
-        'equity-green': '#00A859',
-        'equity-light-blue': '#0072CE',
+        'navy': '#000080',       // Primary navy blue
+        'navy-light': '#1a1aff', // Lighter navy for hover states
+        'white': '#ffffff',      // Pure white
+        'gray-light': '#f5f5f5', // Light gray for backgrounds
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
